@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editing Quote</title>
+<head>
+    <style>
+          .container{
+    background:url(https://images.unsplash.com/photo-1527239441953-caffd968d952?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 970px;
+    color: white;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+}
+.messagebox{
+    width: 300px;
+    height: 250px;
+    background: none;
+    color: white;
+    font-size: 20px;
+}
+    </style>
+</head>
+
+<body>
+
+
+<div class="container">
+    <div class="error">
+        {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    </div>
+
+    <div class="form">
+    <form action="/process_edit/{{quote_id}}" method="post">
+        {% csrf_token %}
+    <h1>Edit a Quote</h1>
+    <label> New Quote </label> 
+    <input type="text" name="Quote" class="messagebox" id="title"><br>
+    <input type="submit" class="btn" value="Edit"> <br>
+    </form>
+
+
+</body>
+</html>

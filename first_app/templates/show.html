@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <title>Quotes By User</title>
+    <style>
+    .container{
+    background:url(https://images.unsplash.com/photo-1510070009289-b5bc34383727?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 970px;
+    color: white;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+}
+a{
+    color: black;
+}
+p{
+    color: black;
+}
+    </style>
+</head>
+<body>
+    <body>
+        <div class="container">
+            <div class="links">
+                <a href="/success"> Home</a>
+                <a href="/destroy"> Log Out </a><br>
+            </div>
+            <h1>Quotes Uploaded by {{user.fname}} </h1>
+            <p>Count:{{Quote.all.count}} </p>
+            <table>
+             {% for quote in Quote %} 
+             <tr>
+            <td>{{quote.quotes}}</td>
+            {% endfor %} </tr>
+        </table>
+            <p></p>
+        </div>
+    </body>
+    
+</body>
+</html>

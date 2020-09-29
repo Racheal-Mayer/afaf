@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Domine&display=swap" rel="stylesheet">
+    <title>Quotable Quotes</title>
+<style>
+    .container{
+        background:url(https://images.unsplash.com/photo-1528458965990-428de4b1cb0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=670&q=80);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height:970px;
+        color:black;
+        font-family: 'Domine', serif;
+    }
+    .success{
+        text-align:center;
+        font-size: 30px;
+    }
+    a{
+        color:black;
+        font-size: 20px;
+    }
+    .textbox{
+        width: 300px;
+        height: 200px;
+        background:none;
+        font-size: 15px;
+    }
+    p{
+        font-size: 30px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+   <p class="success">SUCCESS! Welcome, {{loggedinuser.fname}} <br></p>
+
+        <a href="/destroy"> Log Out </a> </h1><br>
+        <div class="container">
+            <h1>Contribute a Quote!</h1>
+    
+            {% if messages %}
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+            {% endif %}
+
+            <form action="/addquote" method="post">
+                {% csrf_token %}
+                <p>Quote: <input type="text" name="Quote" class="textbox" id=""> </p>
+                <p>Quoted By: <input type="text" name="quotedby" id=""> </p>
+                <input type="submit" value="Add" class="addbtn"> </form> 
+
+<h1>Your Quotes </h1>
+<table>
+    <tr>
+        <th>Submitted By:</th>
+        <th>Your Quotes:</th>
+        <th>Quoted By:</th>
+        <th>Action:</th>
+    </tr>
+    {% for quote in myquotes %}
+    <tr>
+        <td><a href="/show/{{quote.uploader.id}}">{{quote.uploader.fname}}</a></td>
+        <td>{{quote.quotes}}</td>
+        <td>{{quote.quotedby}}</td>
+        {% if loggedinuser == quote.uploader %}
+        <td><a href="delete/{{quote.id}}">Delete</a>
+        <a href="/edit/{{quote.id}}">Edit</a></td>
+        {% else %}
+        <td><a href="/removefromFav/{{quote.id}}">Remove from Favorites</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+<h1>Other Users Quotes</h1>
+<table>
+    <tr>
+        <tr>
+            <th>Submitted By:</th>
+            <th>Quotable Quotes:</th>
+            <th>Quoted By:</th>
+            <th>Action:</th>
+        </tr>
+    {% for quote in notmyquotes %}
+    <tr>
+        <td><a href="/show/{{quote.uploader.id}}">{{quote.uploader.fname}}</a></td>
+        <td>{{quote.quotes}}</td>
+        <td>{{quote.quotedby}}</td>
+        {% if loggedinuser == quote.uploader %}
+        <td><a href="">Delete</a></td>
+        {% else %}
+        <td><a href="addtofav/{{quote.id}}">Add to Favorites</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+
+</table>
+</body>
+</html>
